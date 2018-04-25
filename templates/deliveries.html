@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
+<div class="page-header">
+<div class="col-md-offset-4">
+    <h1>Deliveries Record</h1>
+</div>
+</div>
+
+<table class="table table-hover table-striped table-bordered table-list">
+    <thead><tr><th>Date</th><th>Sender Name</th><th>Sender Number</th><th>Recipient's Name</th><th>Delivery Mode</th><th>Service</th></tr></thead>
+    {% for d in deliveriess %}
+    <tr>
+        <td>
+            {{ moment(d.date).format('L') }}
+        </td>
+        <td>{{ d.sender_name }}</td>
+        <td>{{ d.sender_number }}</td>
+        <td>{{ d.recipient_name }}</td>
+        <td>{{ d.delivery_mode }}</td>
+        <td>{{ d.services }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+ {% endblock %}

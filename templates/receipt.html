@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+{#<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">#}
+     <link href="{{ url_for('static', filename='receipt.css') }}" rel="stylesheet">
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+	<div class="row">
+
+        <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+            <div class="row">
+    			<div class="receipt-header">
+					<div class="col-xs-6 col-sm-6 col-md-6">
+						<div class="receipt-left">
+
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 text-right">
+						<div class="receipt-right">
+							<h1>Aamnex Delivery Service</h1>
+
+							<p>aamnexdeliveryservice@gmail.com <i class="fa fa-envelope-o"></i></p>
+							<p>No 2 Shehu Laminu Street <i class="fa fa-location-arrow"></i></p>
+                            <p>AQAF Plaza, U/Rimi Kaduna <i class="fa fa-location-arrow"></i></p>
+                            <p>No 11 Asa Street, Maitama, Abuja <i class="fa fa-location-arrow"></i></p>
+                            <p>+2348036116302 <i class="fa fa-phone"></i></p>
+						</div>
+					</div>
+				</div>
+            </div>
+
+			<div class="row">
+				<div class="receipt-header receipt-header-mid">
+					<div class="col-xs-8 col-sm-8 col-md-8 text-left">
+						<div class="receipt-right">
+							<h5>{{ Item.recipient_name }} <small> {# for random number #}</small></h5>
+							<p><b>Mobile :</b> {{ Item.recipient_number}}</p>
+							<p><b>Delivery Mode: </b>{{ Item.delivery_mode }}</p>
+							<p><b>Address :</b> {{ Item.address }}</p>
+						</div>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4">
+						<div class="receipt-left">
+							<h3>Receipt</h3>
+						</div>
+					</div>
+				</div>
+            </div>
+
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-md-9">Payment Made</td>
+                            <td class="col-md-3"><i class="fa fa-inr"></i>{{ Item.payment }}</td>
+                        </tr>
+                            <tr>
+                            <td class="col-md-9">Item To Deliver</td>
+                            <td class="col-md-3"><i class="fa fa-inr"></i>{{ Item.Item_Deliver }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right">
+                            <p>
+                                <strong>Total Amount: </strong>
+                            </p>
+
+
+							</td>
+                            <td>
+                            <p>
+                                <strong><i class="fa fa-inr"></i>{{ Item.payment }}</strong>
+                            </p>
+
+							</td>
+                        </tr>
+                        <tr>
+
+                            <td class="text-right"><h2><strong>Total: </strong></h2></td>
+                            <td class="text-left text-danger"><h2><strong><i class="fa fa-inr"></i>&#8358;{{ Item.payment }}</strong></h2></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+			<div class="row">
+				<div class="receipt-header receipt-header-mid receipt-footer">
+					<div class="col-xs-8 col-sm-8 col-md-8 text-left">
+						<div class="receipt-right">
+							<p><b>Date : </b>{{ Item.date.strftime('%B %d, %Y') }}</p>
+							<h5 style="color: rgb(140, 140, 140);">Thank you for your business!</h5>
+						</div>
+					</div>
+					<div class="col-xs-4 col-sm-4 col-md-4">
+						<div class="receipt-left">
+							<h1>Signature</h1>
+                            <br>
+                            <input class="btn-large btn-navbar" type="button" onclick="window.print(); return false;" value="Print">
+						</div>
+					</div>
+
+				</div>
+            </div>
+
+        </div>
+	</div>
+</div>
+
+{% endblock %}

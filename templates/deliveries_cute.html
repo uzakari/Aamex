@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+{% import '_marcros.html' as macros %}
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+
+<div class="container">
+    <div class="row">
+    <br>
+    <br>
+        <div class="col-md-10 col-md-offset-1">
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+        </div>
+        {% endfor %}
+            <div class="panel panel-default panel-table">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col col-xs-6">
+                    <h3 class="panel-title">Deliveries Record</h3>
+                  </div>
+                  <div class="col col-xs-6 text-right">
+                     <a href="{{ url_for('product') }}"> <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button></a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-hover table-striped table-bordered table-list">
+                  <thead>
+                    <tr>
+                        <th><em class="fa fa-cog"></em></th>
+                        <th class="hidden-xs">DATE</th>
+                        <th>SENDERS NAME</th>
+                        <th>SENDERS NUMBER</th>
+                        <th>RECIPIENTS NAME</th>
+                        <th>RECIPIENTS NUMBER</th>
+                        <th>DELIVERY MODE</th>
+                        <th>SERVICE</th>
+
+                        <th>PAYMENT</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                        {% for d in deliveriess %}
+                           <tr >
+                            <td align="center">
+
+                              <a class="btn btn-default" href="{{ url_for('edit_product', id=d.id) }}"><em class="fa fa-pencil"></em></a>
+                              <a class="btn btn-danger" href="{{ url_for('delete_product', id=d.id) }}" onclick="return confirm('Are you sure you want to delete this item?');" ><em class="fa fa-trash" > </em></a>
+                            </td>
+                            <td>{{ moment(d.date).format('L')}}</td>
+                               <td class="hidden-xs"><a href="{{ url_for('receipt', id=d.id) }}">{{ d.sender_name }}</a></td>
+                                <td>{{ d.sender_number }}</td></a>
+                                <td>{{ d.recipient_name }}</td>
+                                 <td>{{ d.recipient_number }}</td>
+                                <td>{{ d.delivery_mode }}</td>
+                                <td>{{ d.services }}</td>
+
+                                <td>	&#8358;{{ d.payment }}</td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                </table>
+
+              </div>
+                <div class="row pagination-sm pagination paginator pagination-right">
+                         {{ macros.pagination_widget(pagination, 'deliveries') }}
+                </div>
+              </div>
+            </div>
+
+</div>
+
+</div>
+
+{% endblock %}
