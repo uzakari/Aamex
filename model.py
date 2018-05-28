@@ -11,7 +11,7 @@ from flask_admin import Admin
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/umarzakari/PycharmProjects/ads/ads.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/ads'
 admin = Admin(app)
 app.secret_key = 'itissupposetobesecret'
 boo = Bootstrap(app)

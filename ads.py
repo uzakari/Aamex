@@ -1,7 +1,6 @@
 from flask import render_template, flash, redirect, url_for, make_response, request
-from model import app
 from forms import Login_Form, signUP_form, add_item
-from model import Signup, db, Additemmodel
+from model import Signup, db, Additemmodel, app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from model import admin
@@ -145,5 +144,7 @@ def receipt(id):
 #     return response
 admin.add_view(ModelView(Signup, db.session))
 admin.add_view(ModelView(Additemmodel, db.session))
+
 if __name__ == '__main__':
     app.run(debug=True)
+    #this part wont actually run when its deploy
